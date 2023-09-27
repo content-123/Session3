@@ -51,85 +51,43 @@ Session 3-Tasks
 
 
 2.User rest countries Url and display the flags in the console
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flag</title>
-</head>
-<body>
-    <script>
-        fetch('https://restcountries.com/v3.1/all')
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(country => {
-      const flagUrl = country.flags.png; // Assuming the flag URL is in the 'flags.png' property
-      console.log(`Country: ${country.name.common}, Flag URL: ${flagUrl}`);
-    });
-  })
-  .catch(error => console.error('Error fetching data:', error));
-    </script>
-</body>
-</html>
 
+const xhr=new XMLHttpRequest()
+
+xhr.open("GET","https://restcountries.com/v3.1/all",true)
+xhr.send()
+xhr.onload=function()
+{
+     var data=JSON.parse(this.response)
+    console.log(data)
+     
+    
+for(var k in data){
+    const result =data[k].flag
+    console.log(result)
+}
+}
 
 
 
 
 3.User rest countries url and print all countries name regions subregions and population.
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Country Information</title>
-</head>
-<body>
-    <h1>Country Information</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Country</th>
-                <th>Region</th>
-                <th>Subregion</th>
-                <th>Population</th>
-            </tr>
-        </thead>
-        <tbody id="country-data">
-        </tbody>
-    </table>
+const xhr=new XMLHttpRequest()
 
-    <script>
-        async function fetchCountryData() {
-            try {
-                const response = await fetch('https://restcountries.com/v3.1/all');
-                const data = await response.json();
-
-                const countryData = document.getElementById('country-data');
-
-                data.forEach(country => {
-                    const name = country.name.common;
-                    const region = country.region;
-                    const subregion = country.subregion;
-                    const population = country.population;
-
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${name}</td>
-                        <td>${region}</td>
-                        <td>${subregion}</td>
-                        <td>${population}</td>
-                    `;
-
-                    countryData.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
-
-        // Call the function to fetch and display country information
-        fetchCountryData();
-    </script>
-</body>
-</html>
+xhr.open("GET","https://restcountries.com/v3.1/all",true)
+xhr.send()
+xhr.onload=function()
+{
+     var data=JSON.parse(this.response)
+    console.log(data)
+     
+    
+for(var k in data){
+    const result =data[k].name.common
+    const result1=data[k].region
+    const result2=data[k].subregion
+    const result3=data[k].population
+    console.log(result,result1,result2,result3)
+}
+}
